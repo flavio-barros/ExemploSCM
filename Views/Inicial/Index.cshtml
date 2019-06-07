@@ -1,0 +1,95 @@
+﻿@{
+    ViewBag.Title = "Página inicial";
+    Layout = "_Layout";
+}
+
+@section lineChart
+{
+    <script type="text/javascript" src="~/MyScripts/grafico-linha.js"></script>
+}
+
+<div class="card mb-3">
+    <div class="card-header">
+        Painel de Controle
+    </div>
+
+    <div class="card-body">
+
+        @using (Html.BeginForm("gerarGrafico", "Inicial", FormMethod.Post, new { @class = "form-inline" }))
+        {
+            <div class="form-group mb-2">
+                @{
+                    List<SelectListItem> listItems = new List<SelectListItem>();
+                }
+                @foreach (var mercadoria in ViewBag.Mercadorias)
+                {
+                    string idString = Convert.ToString(@mercadoria.id);
+                    listItems.Add(new SelectListItem
+                    {
+                        Text = @mercadoria.nome,
+                        Value = idString
+                    });
+                }
+                @Html.DropDownList("mercadoria", listItems, "-- Selecione a mercadoria --", new { @class = "form-control selectpicker mx-3", @readonly = false })
+            </div>
+            <div class="form-group mb-2">
+                @{
+                    List<SelectListItem> listItemsMes = new List<SelectListItem>();
+                    List<string> meses = new List<string>()
+                                    {
+                    "Janeiro", "Fevereiro", "Março", "Abril", "Maio",
+                    "Junho", "Julho", "Agosto", "Setembro", "outubro",
+                    "Novembro", "Dezembro"
+                };
+                    for (int i = 1; i <= 12; i++)
+                    {
+                        listItemsMes.Add(new SelectListItem { Text = Convert.ToString(i), Value = Convert.ToString(i) });
+                    }
+                }
+                @Html.DropDownList("mes", listItemsMes, "-- Selecione o mês --", new { @class = "form-control selectpicker mx-3", @readonly = false })
+            </div>
+            <div class="form-group mb-2">
+                @{
+                    List<SelectListItem> listItemsAno = new List<SelectListItem>();
+                    for (int i = 2015; i <= @DateTime.Now.Year; i++)
+                    {
+                        listItemsAno.Add(new SelectListItem { Text = Convert.ToString(i), Value = Convert.ToString(i) });
+                    }
+                }
+                @Html.DropDownList("ano", listItemsAno, "-- Selecione o ano --", new { @class = "form-control selectpicker mx-3", @readonly = false })
+            </div>
+            <button type="submit" class="btn btn-primary mb-xl-2 mx-3">Gerar Gráfico</button>
+        }
+
+        @{
+            if (ViewBag.PontosGrafico != null)
+            {
+                <div id="chartContainer" style="height: 300px; width: 100%;"></div>
+                <script type="text/javascript">
+                    window.onload = function () {
+                        var chart = new CanvasJS.Chart("chartContainer", {
+                            theme: "light2",
+                            animationEnabled: true,
+                            title: {
+                                text: "Quantidade x Dias"
+                            },
+                            data: [
+                            {
+                                type: "line", //change type to bar, line, area, pie, etc
+                                dataPoints: @Html.Raw(ViewBag.PontosGrafico),
+                            }
+                            ]
+                        });
+                        chart.render();
+                    };
+                </script>
+            }
+        }
+
+    </div>
+</div>
+
+@section canvasjs
+{
+    <script type="text/javascript" src="~/canvasjs-2.3.1/canvasjs.min.js"></script>
+}

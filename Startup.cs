@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
@@ -47,6 +48,9 @@ namespace ExemploSCM
                 // app.UseExceptionHandler("/Home/Error");
                 app.UseHsts();
             }
+
+            string appRoot = env.ContentRootPath;
+            AppDomain.CurrentDomain.SetData("DataDirectory", Path.Combine(appRoot, "App_Data"));
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();

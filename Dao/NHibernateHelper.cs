@@ -10,7 +10,7 @@ namespace ExemploSCM.Dao
     {
         public static ISession OpenSession()
         {
-            string connectionString = @"Data Source=|DataDirectory|\mstar.db";
+            string connectionString = @"Data Source=App_Data\mstar.db";
             ISessionFactory sessionFactory = Fluently.Configure()
                 .Database(SQLiteConfiguration.Standard.ConnectionString(connectionString))
                 .Mappings(m =>

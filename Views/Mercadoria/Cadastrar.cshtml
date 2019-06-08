@@ -1,71 +1,62 @@
 ﻿@model ExemploSCM.Models.Mercadoria
 
 @{
-    ViewBag.Title = "Cadastrar";
+    ViewData["Title"] = "Cadastrar Mercadoria";
+    Layout = "_Layout";
 }
 
-<div class="card mb-3">
-    <div class="card-header">
-        <div class="row justify-content-between align-items-center px-lg-2">
-            <span>Cadastrar Mercadoria</span>
+@using (Html.BeginForm("Cadastrar", "Mercadoria", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <div class="form-row">
+        <div class="form-group col-md-8">
+            @Html.LabelFor(model => model.Nome)
+            @Html.EditorFor(model => model.Nome, new
+            {
+                htmlAttributes = new
+                {
+                    @class = "form-control",
+                @placeholder = "Nome"
+                }
+            })
+            @Html.ValidationMessageFor(model => model.Nome)
+        </div>
+        <div class="form-group col-md-4">
+            @Html.LabelFor(model => model.Numero_registro)
+            @Html.EditorFor(model => model.Numero_registro,
+                new { htmlAttributes = new { @class = "form-control", @placeholder = "Número de registro" } })
+            @Html.ValidationMessageFor(model => model.Numero_registro)
         </div>
     </div>
-    <div class="card-body">
-        @using (Html.BeginForm("Cadastrar", "Mercadoria", FormMethod.Post))
-        {
-            @Html.AntiForgeryToken()
-            @Html.ValidationSummary(true)
-            <div class="form-row">
-                <div class="form-group col-md-8">
-                    @Html.LabelFor(model => model.Nome)
-                    @Html.EditorFor(model => model.Nome, new
-                    {
-                        htmlAttributes = new
-                        {
-                            @class = "form-control",
-                        @placeholder = "Nome"
-                        }
-                    })
-                    @Html.ValidationMessageFor(model => model.Nome)
-                </div>
-                <div class="form-group col-md-4">
-                    @Html.LabelFor(model => model.Numero_registro)
-                    @Html.EditorFor(model => model.Numero_registro,
-                        new { htmlAttributes = new { @class = "form-control", @placeholder = "Número de registro" } })
-                    @Html.ValidationMessageFor(model => model.Numero_registro)
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                    @Html.LabelFor(model => model.Fabricante)
-                    @Html.EditorFor(model => model.Fabricante, new { htmlAttributes = new { @class = "form-control", @placeholder = "Fabricante" } })
-                    @Html.ValidationMessageFor(model => model.Fabricante)
-                </div>
-                <div class="form-group col-md-6">
-                    @Html.LabelFor(model => model.Tipo)
-                    @Html.EditorFor(model => model.Tipo,
-                        new { htmlAttributes = new { @class = "form-control", @placeholder = "Tipo" } })
-                    @Html.ValidationMessageFor(model => model.Tipo)
-                </div>
-            </div>
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.Descricao)
-                @Html.TextAreaFor(model => model.Descricao, new { @class = "form-control", @style = "resize: none;", @rows = "5" })
-                @Html.ValidationMessageFor(model => model.Descricao)
-            </div>
-            <div class="form-group float-right">
-                <button type="reset" class="btn btn-secondary" id="buttonResetCadMerc">
-                    Cancelar
-                </button>
-                <button type="submit" class="btn btn-primary">Cadastrar</button>
-            </div>
-        }
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Fabricante)
+            @Html.EditorFor(model => model.Fabricante, new { htmlAttributes = new { @class = "form-control", @placeholder = "Fabricante" } })
+            @Html.ValidationMessageFor(model => model.Fabricante)
+        </div>
+        <div class="form-group col-md-6">
+            @Html.LabelFor(model => model.Tipo)
+            @Html.EditorFor(model => model.Tipo,
+                new { htmlAttributes = new { @class = "form-control", @placeholder = "Tipo" } })
+            @Html.ValidationMessageFor(model => model.Tipo)
+        </div>
     </div>
-</div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Descricao)
+        @Html.TextAreaFor(model => model.Descricao, new { @class = "form-control", @style = "resize: none;", @rows = "5" })
+        @Html.ValidationMessageFor(model => model.Descricao)
+    </div>
+    <div class="form-group float-right">
+        <button type="reset" class="btn btn-secondary" id="buttonResetCadMerc">
+            Cancelar
+        </button>
+        <button type="submit" class="btn btn-primary">Cadastrar</button>
+    </div>
+}
 
 @section scripts {
-    @RenderSection("scripts", required: false)
     <script type="text/javascript" src="~/Scripts/jquery-3.4.1.min.js"></script>
     <script type="text/javascript" src="~/bundles/jqueryval"></script>
 }

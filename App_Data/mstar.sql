@@ -1,12 +1,12 @@
 /* Script de criação do banco de dados - MStarSupply SCM */
 
 CREATE TABLE Mercadoria (
-	id INTEGER NOT NULL PRIMARY KEY,
-	numero_registro INTEGER NOT NULL,
-	nome VARCHAR(100) NOT NULL,
-	fabricante VARCHAR(50) NOT NULL,
-	tipo VARCHAR(20) NOT NULL,
-	descricao VARCHAR(200)
+	Id INTEGER NOT NULL PRIMARY KEY,
+	Numero_registro INTEGER NOT NULL,
+	Nome VARCHAR(100) NOT NULL,
+	Fabricante VARCHAR(50) NOT NULL,
+	Tipo VARCHAR(20) NOT NULL,
+	Descricao VARCHAR(200)
 );
 
 INSERT INTO Mercadoria VALUES (
@@ -17,21 +17,21 @@ INSERT INTO Mercadoria VALUES (
 );
 
 CREATE TABLE Entrada (
-	id INTEGER NOT NULL PRIMARY KEY,
-	mercadoria_id INTEGER NOT NULL,
-	quantidade Integer NOT NULL,
-	data TEXT NOT NULL,
-	hora TEXT(20) NOT NULL,
-	local VARCHAR(20) NOT NULL,
-	FOREIGN KEY(mercadoria_id) REFERENCES Mercadoria(id)
+	Id INTEGER NOT NULL PRIMARY KEY,
+	Mercadoria_Id INTEGER NOT NULL,
+	Quantidade Integer NOT NULL,
+	Data TEXT NOT NULL,
+	Hora TEXT(20) NOT NULL,
+	Local VARCHAR(20) NOT NULL,
+	FOREIGN KEY(Mercadoria_Id) REFERENCES Mercadoria(Id)
 );
 
 CREATE TABLE Saida (
-	id INTEGER NOT NULL PRIMARY KEY,
-	mercadoria_id INTEGER NOT NULL,
-	quantidade Integer NOT NULL,
-	data DATETIME NOT NULL,
-	hora DATETIME NOT NULL,
-	local VARCHAR(20) NOT NULL,
-	FOREIGN KEY(mercadoria_id) REFERENCES Mercadoria(id)
+	Id INTEGER NOT NULL PRIMARY KEY,
+	Mercadoria_id INTEGER NOT NULL,
+	Quantidade Integer NOT NULL,
+	Data DATETIME NOT NULL,
+	Hora DATETIME NOT NULL,
+	Local VARCHAR(20) NOT NULL,
+	FOREIGN KEY(Mercadoria_Id) REFERENCES Mercadoria(Id)
 );

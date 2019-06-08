@@ -1,93 +1,85 @@
-﻿<!DOCTYPE html>
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>@ViewData["Title"] - SCM</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <!--<link rel="stylesheet" href="~/MyStyles/geral.css" />
-
-    <link rel="stylesheet" href="~/Theme/vendor/fontawesome-free/css/all.min.css" />
-    <link rel="stylesheet" href="~/Theme/vendor/datatables/dataTables.bootstrap4.css" />
-    <link rel="stylesheet" href="~/Theme/css/sb-admin.css" />-->
+    <link rel="stylesheet" href="~/lib/fonts/fontawesome-free/css/all.min.css" />
+    <link rel="stylesheet" href="~/css/dashboard.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
 
     @RenderSection("lineChart", required: false)
     @RenderSection("canvasjs", required: false)
+    @RenderSection("scripts", required: false)
 </head>
 
-<body id="page-top">
+<body>
 
-    <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-        <a class="navbar-brand mr-1" asp-controller="Inicial" asp-action="Index">Gerenciamento da Cadeia de Suprimentos</a>
+    <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        <a class="navbar-brand col-sm-1 col-md-2 mr-0" asp-controller="Inicial" asp-action="Index">
+            <i class="fab fa-mandalorian"></i>
+            Exemplo SCM
+        </a>
     </nav>
 
-    <div id="wrapper">
-
-        <!-- Barra lateral -->
-        <ul class="sidebar navbar-nav">
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Inicial" asp-action="Index">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Movimentações</span>
-                </a>
-            </li>
-            <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <i class="fas fa-fw fa-book-open"></i>
-                    <span>Registar</span>
-                </a>
-                <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-                    <a class="dropdown-item" asp-controller="Entrada" asp-action="Index">Entrada</a>
-                    <a class="dropdown-item" asp-controller="Saida" asp-action="Index">Saída</a>
+    <div class="container-fluid">
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-dark sidebar">
+                <div class="sidebar-sticky">
+                    <ul class="nav flex-column">
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Inicial" asp-action="Index">
+                                <i class="fas fa-home col-sm-1"></i>
+                                <span class="col-sm-1">Página Inicial</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Mercadoria" asp-action="Index">
+                                <i class="far fa-file-pdf col-sm-1"></i>
+                                <span class="col-sm-1">Registros</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Mercadoria" asp-action="Index">
+                                <i class="fas fa-box-open col-sm-1"></i>
+                                <span class="col-sm-1">Mercadorias</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" asp-controller="Relatorio" asp-action="Index">
+                                <i class="fas fa-chart-line col-sm-1"></i>
+                                <span class="col-sm-1">Relatórios</span>
+                            </a>
+                        </li>
+                    </ul>
                 </div>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Mercadoria" asp-action="Index">
-                    <i class="fas fa-fw fa-box-open"></i>
-                    <span>Mercadorias</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" asp-controller="Relatorio" asp-action="Index">
-                    <i class="far fa-file-pdf"></i>
-                    <span>Relatórios</span>
-                </a>
-            </li>
-        </ul>
+            </nav>
 
-        <div id="content-wrapper">
-            <div class="container-fluid">
+            <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-4">
+                <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+                    <h1 class="h2">@ViewData["Title"]</h1>
+                </div>
                 @RenderBody()
-            </div>
-            <!-- container-fluid -->
-
-            <footer class="sticky-footer">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright - SCM &copy; @DateTime.Now.Year</span>
-                    </div>
-                </div>
-            </footer>
-
+            </main>
         </div>
-        <!-- content-wrapper -->
+        <!--row-->
+        <!--<footer class="footer mt-auto py-3">
+            <div class="container">
+                <span>Copyright - SCM &copy; @DateTime.Now.Year</span>
+            </div>
+        </footer>-->
 
     </div>
+    <!--container-fluid-->
 
     <!-- Bootstrap core JavaScript-->]
-    <script src="~/Theme/vendor/jquery/jquery.min.js"></script>
-    <script src="~/Theme/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/lib/jquery/dist/jquery-3.4.1.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/js/site.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="~/Theme/vendor/jquery-easing/jquery.easing.min.js"></script>
-
-    <!-- Page level plugin JavaScript-->
-    <script src="~/Theme/vendor/datatables/jquery.dataTables.js"></script>
-    <script src="~/Theme/vendor/datatables/dataTables.bootstrap4.js"></script>
-
-    <!-- Custom scripts for all pages-->
-    <script src="~/Theme/js/sb-admin.min.js"></script>
-    <script src="~/MyScripts/geral.js"></script>
 </body>
 </html>
